@@ -11,7 +11,7 @@ def plot(df):
 
 def main():
     #start(int), end(int), estimate(bool), alpha(int), beta(int)
-    df = pd.read_csv('test.csv')
+    df = pd.read_csv('result1.csv')
     print(df.columns)
     print(df.describe())
 
@@ -19,11 +19,19 @@ def main():
     accurate_estimate_count = sum(np.equal(df.estimate, df.alpha > df.beta))
     print("Accurate abstact estimates: {}".format(accurate_estimate_count))
 
+    # Total true estimates:
+    print('Total successful trials: {}'.format(sum(df.alpha)))
+    print('Total failed trials: {}'.format(sum(df.beta)))
+
+    print('Total true estimates: {}'.format(sum(df.estimate)))
+    print('Total false estimates: {}'.format(sum(~df.estimate)))
+
+
     # Plot alpha/beta distributions
     df['expected'] = df.alpha / (df.beta + df.alpha)
-    df.hist(column='expected', by='estimate')
+    df.hist(column='expected', by='estimate', bins=50)
 
-    plt.show()
+    #plt.show()
 
 
 if __name__ == '__main__':
