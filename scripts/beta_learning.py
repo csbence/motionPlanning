@@ -3,6 +3,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 
 def plot(df):
@@ -11,7 +12,7 @@ def plot(df):
 
 def main():
     #start(int), end(int), estimate(bool), alpha(int), beta(int)
-    df = pd.read_csv('result1.csv')
+    df = pd.read_csv(sys.argv[1])
     print(df.columns)
     print(df.describe())
 
@@ -31,7 +32,7 @@ def main():
     df['expected'] = df.alpha / (df.beta + df.alpha)
     df.hist(column='expected', by='estimate', bins=50)
 
-    #plt.show()
+    plt.show()
 
 
 if __name__ == '__main__':
